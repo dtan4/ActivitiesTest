@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.TextView;
 
+import java.util.Date;
+
 
 public class FirstActivity extends Activity {
     private static String TAG = "FirstActivity";
@@ -105,6 +107,7 @@ public class FirstActivity extends Activity {
     public void buttonPressed(View view) {
         Log.i(TAG, "buttonPressed");
         Intent intent = new Intent(this, SecondActivity.class);
+        intent.putExtra("param", new Date().toString());
         startActivityForResult(intent, myRequest);
     }
 

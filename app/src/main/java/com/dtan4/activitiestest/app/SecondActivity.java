@@ -12,12 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.TextView;
 
 import java.util.Date;
 
 
 public class SecondActivity extends Activity {
     private static String TAG = "SecondActivity";
+    private String param;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ public class SecondActivity extends Activity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+        param = getIntent().getStringExtra("param");
     }
 
     @Override
@@ -46,6 +50,9 @@ public class SecondActivity extends Activity {
     protected void onResume() {
         super.onStart();
         Log.i(TAG, "onResume");
+
+        TextView paramView = (TextView)findViewById(R.id.second_value_view);
+        paramView.setText(param);
     }
 
     @Override
