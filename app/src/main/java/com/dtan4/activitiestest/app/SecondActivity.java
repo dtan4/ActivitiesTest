@@ -110,11 +110,8 @@ public class SecondActivity extends Activity {
 
     public void buttonPressed(View view) {
         Log.i(TAG, "buttonPressed");
-        String result = new Date().toString();
-        Intent data = new Intent();
-
-        data.putExtra("result", result);
-        setResult(RESULT_OK, data);
-        finish();
+        Intent intent = new Intent(this, FirstActivity.class);
+        intent.putExtra("result", new Date().toString());
+        startActivity(intent);
     }
 }

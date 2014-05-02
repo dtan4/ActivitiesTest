@@ -14,12 +14,15 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.Date;
 
 
 public class FirstActivity extends Activity {
     private static String TAG = "FirstActivity";
     private static final int myRequest = 1234;
+    private String result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class FirstActivity extends Activity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+        result = getIntent().getStringExtra("result");
     }
 
     @Override
@@ -49,6 +54,9 @@ public class FirstActivity extends Activity {
     protected void onResume() {
         super.onStart();
         Log.i(TAG, "onResume");
+
+        TextView resultView = (TextView)findViewById(R.id.first_value_view);
+        resultView.setText(result);
     }
 
     @Override
@@ -108,23 +116,6 @@ public class FirstActivity extends Activity {
         Log.i(TAG, "buttonPressed");
         Intent intent = new Intent(this, SecondActivity.class);
         intent.putExtra("param", new Date().toString());
-        startActivityForResult(intent, myRequest);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.i(TAG, "onActivityResult");
-
-        switch (requestCode) {
-            case myRequest:
-                if (resultCode == RESULT_OK) {
-                    String result = data.getStringExtra("result");
-                    TextView resultView = (TextView)findViewById(R.id.first_value_view);
-                    resultView.setText(result);
-                }
-
-                break;
-        }
+        startActivity(intent);
     }
 }
