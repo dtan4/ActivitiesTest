@@ -3,6 +3,7 @@ package com.dtan4.activitiestest.app;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
+import java.util.Date;
 
 
 public class SecondActivity extends Activity {
@@ -46,7 +48,23 @@ public class SecondActivity extends Activity {
         Log.i(TAG, "onResume");
     }
 
+    @Override
+    protected void onPause() {
+        super.onStart();
+        Log.i(TAG, "onPause");
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStart();
+        Log.i(TAG, "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onStart();
+        Log.i(TAG, "onDestroy");
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,5 +99,15 @@ public class SecondActivity extends Activity {
             View rootView = inflater.inflate(R.layout.fragment_second, container, false);
             return rootView;
         }
+    }
+
+    public void buttonPressed(View view) {
+        Log.i(TAG, "buttonPressed");
+        String result = new Date().toString();
+        Intent data = new Intent();
+
+        data.putExtra("result", result);
+        setResult(RESULT_OK, data);
+        finish();
     }
 }

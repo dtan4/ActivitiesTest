@@ -12,11 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
-
+import android.widget.TextView;
 
 
 public class FirstActivity extends Activity {
     private static String TAG = "FirstActivity";
+    private static final int myRequest = 1234;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,24 @@ public class FirstActivity extends Activity {
     protected void onResume() {
         super.onStart();
         Log.i(TAG, "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onStart();
+        Log.i(TAG, "onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStart();
+        Log.i(TAG, "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onStart();
+        Log.i(TAG, "onDestroy");
     }
 
     @Override
@@ -86,7 +105,23 @@ public class FirstActivity extends Activity {
     public void buttonPressed(View view) {
         Log.i(TAG, "buttonPressed");
         Intent intent = new Intent(this, SecondActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, myRequest);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i(TAG, "onActivityResult");
+
+        switch (requestCode) {
+            case myRequest:
+                if (resultCode == RESULT_OK) {
+                    String result = data.getStringExtra("result");
+                    TextView resultView = (TextView)findViewById(R.id.first_value_view);
+                    resultView.setText(result);
+                }
+
+                break;
+        }
     }
 }
