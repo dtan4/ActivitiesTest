@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import android.os.Build;
 
 
 public class SecondActivity extends Activity {
+    private static String TAG = "SecondActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,25 @@ public class SecondActivity extends Activity {
                     .commit();
         }
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onStart();
+        Log.i(TAG, "onRestart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onStart();
+        Log.i(TAG, "onResume");
+    }
+
 
 
     @Override

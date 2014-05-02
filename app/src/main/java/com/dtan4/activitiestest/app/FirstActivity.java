@@ -3,7 +3,9 @@ package com.dtan4.activitiestest.app;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,10 +16,12 @@ import android.os.Build;
 
 
 public class FirstActivity extends Activity {
+    private static String TAG = "FirstActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate");
         setContentView(R.layout.activity_first);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
@@ -26,6 +30,23 @@ public class FirstActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onStart();
+        Log.i(TAG, "onRestart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onStart();
+        Log.i(TAG, "onResume");
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,5 +81,12 @@ public class FirstActivity extends Activity {
             View rootView = inflater.inflate(R.layout.fragment_first, container, false);
             return rootView;
         }
+    }
+
+    public void buttonPressed(View view) {
+        Log.i(TAG, "buttonPressed");
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
+
     }
 }
